@@ -51,6 +51,8 @@ function Signup() {
           return prevCountdown - 1
         })
       }, 1000) // Update every second
+    } else {
+      setCountdown(20) // Reset the countdown when modal is not shown
     }
 
     return () => clearInterval(interval) // Clear interval on unmount or when modal is closed
@@ -58,7 +60,6 @@ function Signup() {
 
   const handleCloseModal = () => {
     setShowModal(false)
-    setCountdown(20) // Reset the countdown when modal is closed
   }
 
   return (
