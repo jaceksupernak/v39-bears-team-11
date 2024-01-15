@@ -40,20 +40,26 @@ function Signup() {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown((prevCountdown) => {
-        if (prevCountdown === 1) {
-          clearInterval(interval)
-          return 1 // Stop the countdown at 1
-        }
-        return prevCountdown - 1
-      })
-    }, 1000) // Update every second
+    let interval
+    if (showModal) {
+      interval = setInterval(() => {
+        setCountdown((prevCountdown) => {
+          if (prevCountdown === 1) {
+            clearInterval(interval)
+            return 1 // Stop the countdown at 1
+          }
+          return prevCountdown - 1
+        })
+      }, 1000) // Update every second
+    }
 
-    return () => clearInterval(interval) // Clear interval on unmount
-  }, [])
+    return () => clearInterval(interval) // Clear interval on unmount or when modal is closed
+  }, [showModal])
 
-  const handleCloseModal = () => setShowModal(false)
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setCountdown(20) // Reset the countdown when modal is closed
+  }
 
   return (
     <div id="signup" className={styles.Signup}>
