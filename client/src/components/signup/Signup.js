@@ -1,59 +1,59 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signUpUser, loginUser } from '../../store/features/users/usersSlice';
-import Logo from '../logo/Logo';
-import Illustration from '../../icons/signup/signup-illustration.png';
-import ChoiceButton from '../button/ChoiceButton';
-import SignupForm from './SignupForm';
-import styles from '../../styles/Signup-styles/Signup.module.css';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { signUpUser, loginUser } from '../../store/features/users/usersSlice'
+import Logo from '../logo/Logo'
+import Illustration from '../../icons/signup/signup-illustration.png'
+import ChoiceButton from '../button/ChoiceButton'
+import SignupForm from './SignupForm'
+import styles from '../../styles/Signup-styles/Signup.module.css'
 
 function Signup() {
   // Set up formChoice variable to control status of the currently clicked
   // form option which sets the Login Mode or the Signup Mode
-  const [formChoice, setFormChoice] = useState('login');
-  const [isLoading, setIsLoading] = useState(false);
-  const [countdown, setCountdown] = useState(20);
-  const [showModal, setShowModal] = useState(true);
+  const [formChoice, setFormChoice] = useState('login')
+  const [isLoading, setIsLoading] = useState(false)
+  const [countdown, setCountdown] = useState(20)
+  const [showModal, setShowModal] = useState(true)
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   // Create function that handles the choices click and updates the
   // state formChoice variable accordingly
-  const handleFormChoiceClick = (choice) => setFormChoice(choice);
+  const handleFormChoiceClick = (choice) => setFormChoice(choice)
 
   // onValidateSubmit function is a function that is being passed as prop
   // to the SignupForm component. This function gathers the data from the form
   // component and comes back to this Signup component with validated credentials
   // that are ready to be passed onto the Login or Signup functions.
   const onValidatedSubmit = async (validatedCredentials) => {
-    setIsLoading(true);
+    setIsLoading(true)
     if (formChoice === 'login') {
-      await dispatch(loginUser(validatedCredentials));
+      await dispatch(loginUser(validatedCredentials))
     }
     if (formChoice === 'signup') {
-      await dispatch(signUpUser(validatedCredentials));
+      await dispatch(signUpUser(validatedCredentials))
     }
-    setIsLoading(false);
-    navigate('/');
-  };
+    setIsLoading(false)
+    navigate('/')
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCountdown((prevCountdown) => {
         if (prevCountdown === 1) {
-          clearInterval(interval);
-          return 1; // Stop the countdown at 1
+          clearInterval(interval)
+          return 1 // Stop the countdown at 1
         }
-        return prevCountdown - 1;
-      });
-    }, 1000); // Update every second
+        return prevCountdown - 1
+      })
+    }, 1000) // Update every second
 
-    return () => clearInterval(interval); // Clear interval on unmount
-  }, []);
+    return () => clearInterval(interval) // Clear interval on unmount
+  }, [])
 
-  const handleCloseModal = () => setShowModal(false);
+  const handleCloseModal = () => setShowModal(false)
 
   return (
     <div id="signup" className={styles.Signup}>
@@ -130,7 +130,7 @@ function Signup() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default Signup;
+export default Signup
