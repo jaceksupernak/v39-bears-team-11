@@ -14,6 +14,7 @@ function Signup() {
   const [formChoice, setFormChoice] = useState('login')
   const [isLoading, setIsLoading] = useState(false)
   const [countdown, setCountdown] = useState(20)
+  const [showModal, setShowModal] = useState(true)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -52,8 +53,27 @@ function Signup() {
     return () => clearInterval(interval) // Clear interval on unmount
   }, [])
 
+  const handleCloseModal = () => setShowModal(false)
+
   return (
     <div id="signup" className={styles.Signup}>
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.close} onClick={handleCloseModal}>
+              &times;
+            </span>
+            <p>Hello, welcome to the demo version.</p>
+            <p>
+              Login as username: "demo@gmail.com" and password "demo1" for the
+              demo experience.
+            </p>
+            <p>
+              Alternatively, you are welcome to simply sign up as a new user.
+            </p>
+          </div>
+        </div>
+      )}
       <div className={styles.Signup__side}>
         <Logo />
         <img
