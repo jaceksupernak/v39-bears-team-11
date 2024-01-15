@@ -11,7 +11,7 @@ import styles from '../../styles/Signup-styles/Signup.module.css'
 function Signup() {
   // Set up formChoice variable to control status of the currently clicked
   // form option which sets the Login Mode or the Signup Mode
-  const [formChoice, setFormChoice] = useState('signup')
+  const [formChoice, setFormChoice] = useState('login')
   const [isLoading, setIsLoading] = useState(false)
   const [countdown, setCountdown] = useState(20)
 
@@ -92,10 +92,10 @@ function Signup() {
               <div />
             </div>
             <h3>
-              Welcome to the portfolio revived version. It might take up to
-              {` ${countdown} seconds`}
-              for the first login or signup action to work. The server needs to
-              wake up from its hibernation. Thanks for waiting!
+              Welcome to the portfolio demo version. It might take up to
+              {` ${countdown} `}
+              seconds for the first login or signup action to work. The server
+              needs to wake up from its hibernation. Thanks for waiting!
             </h3>
           </div>
         ) : (
